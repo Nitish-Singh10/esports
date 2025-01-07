@@ -7,14 +7,15 @@
 <div class="sm:p-5 p-2">
     <div class="flex gap-4 mb-5">
         <a href={{url('/dashboard')}}
-            class="px-4 py-2 bg-red-500 text-white rounded-md shadow transition duration-200 mr-2">
+            class="{{request()->is('dashboard') ? 'px-4 py-2 dark:bg-gray-700 bg-red-500 text-white rounded-md shadow transition duration-200 mr-2' : 'px-4 py-2 bg-red-500 text-white rounded-md shadow transition duration-200 mr-2'}}">
             Team
         </a>
         <a href={{url('/bgmi_duo')}}
-            class="px-4 py-2 bg-red-500 text-white rounded-md shadow transition duration-200 mr-2">
+            class="{{request()->is('bgmi_duo') ? 'px-4 py-2 dark:bg-gray-700 bg-red-500 text-white rounded-md shadow transition duration-200 mr-2' : 'px-4 py-2 bg-red-500 text-white rounded-md shadow transition duration-200 mr-2'}}">
             Duo
         </a>
-        <a href={{url('/bgmi_solo')}} class="px-4 py-2 bg-red-500 text-white rounded-md shadow transition duration-200">
+        <a href={{url('/bgmi_solo')}}
+            class="{{request()->is('bgmi_solo') ? 'px-4 py-2 dark:bg-gray-700 bg-red-500 text-white rounded-md shadow transition duration-200 mr-2' : 'px-4 py-2 bg-red-500 text-white rounded-md shadow transition duration-200 mr-2'}}">
             Solo
         </a>
     </div>

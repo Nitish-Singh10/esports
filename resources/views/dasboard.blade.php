@@ -27,7 +27,7 @@
                         <polyline points="9 22 9 12 15 12 15 22"></polyline>
                     </svg>
                 </a>
-                <a href={{url('/add')}} class="{{ request()->is('/add')
+                <a href={{url('/add')}} class="{{ request()->is('add')
     ? 'h-10 w-12 dark:bg-gray-700 dark:text-white rounded-md flex items-center justify-center text-blue-500'
     : 'h-10 w-12 dark:text-gray-500 rounded-md flex items-center justify-center' }}">
                     <svg viewBox="0 0 24 24" class="h-5" stroke="currentColor" stroke-width="2" fill="none"
@@ -85,17 +85,20 @@
                         </div>
                         <div class="flex items-center space-x-3 sm:mt-7 mt-4">
                             @if (!request()->is('add'))
-                                <a href={{url('/dashboard')}}
-                                    class="px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5">BGMI</a>
-                                <a href={{url('/freefire_team')}}
-                                    class="px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5">FREE
-                                    FIRE</a>
-                                <a href={{url('/fcmobile')}}
-                                    class="px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5 sm:block hidden">FC
-                                    MOBILE</a>
+                                <a href="{{ url('/dashboard') }}"
+                                    class="{{ request()->is('dashboard', 'bgmi_duo', 'bgmi_solo') ? 'px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5' : 'px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5' }}">
+                                    BGMI
+                                </a>
+                                <a href="{{ url('/freefire_team') }}"
+                                    class="{{ request()->is('freefire_team', 'freefire_duo', 'freefire_solo') ? 'px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5' : 'px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5' }}">
+                                    FREE FIRE
+                                </a>
+                                <a href="{{ url('/fcmobile') }}"
+                                    class="{{ request()->is('fcmobile') ? 'px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5' : 'px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5' }}">
+                                    FC MOBILE
+                                </a>
                             @endif
                         </div>
-
                     </div>
                     <div class="sm:p-7 p-4">
                         @yield('section')
@@ -104,7 +107,6 @@
             </div>
         </div>
     </div>
-
 </body>
 
 </html>
