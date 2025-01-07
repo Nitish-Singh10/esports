@@ -5,7 +5,6 @@
     <meta charset="UTF-8">
     <title>@yield('title', 'Dashboard')</title>
     <link href="https://assets.codepen.io/344846/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="./style.css">
 
 </head>
 
@@ -76,13 +75,28 @@
                                     class="flex xl:flex-row flex-col items-center font-medium text-gray-900 dark:text-white pb-2 mb-2 xl:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full">
                                     <img src="https://img.freepik.com/free-photo/3d-rendered-illustration-businessman-with-laptop-books_1057-45897.jpg?t=st=1736235929~exp=1736239529~hmac=4da6f4f6e2a583b59b8f6f888e0b3e60ad1babb838c01d1c6cd8f4c2da025997&w=1060"
                                         class="w-7 h-7 mr-2 rounded-full" alt="profile" />
-                                    {{ $user->username }} <!-- Display the username -->
+                                    {{ $user->username }}
                                 </div>
+
                                 <div class="flex items-center w-full">
                                     <div
                                         class="text-xs py-1 px-2 leading-none dark:bg-gray-900 bg-blue-100 text-blue-500 rounded-md">
-                                        {{ $user->role }} <!-- Display the role -->
+                                        {{ $user->role }}
                                     </div>
+                                    <div class="text-xs ml-2 py-1 px-2 leading-none dark:bg-gray-900 bg-blue-100 rounded-md"
+                                        id="online-status" style="color: {{ $user->online ? 'green' : 'red' }};">
+                                        {{ $user->online ? 'Online' : 'Offline' }}
+                                    </div>
+                                    @if (session('role') == 'admin')
+                                        <div
+                                            class="text-xs ml-2 py-1 px-2 leading-none dark:bg-gray-900 bg-blue-100 text-blue-500 rounded-md">
+                                            <a href="{{ url('/user_update', ['id' => $user->id, 'status' => $user->status]) }}"
+                                                class="text-blue-500 hover:underline">
+                                                {{ $user->status == 1 ? 'Active' : 'Inactive' }}
+                                            </a>
+                                        </div>
+                                    @endif
+
                                 </div>
                             </button>
                         @endforeach
@@ -123,6 +137,7 @@
             </div>
         </div>
     </div>
+
 </body>
 
 </html>

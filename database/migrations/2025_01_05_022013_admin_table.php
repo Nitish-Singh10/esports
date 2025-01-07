@@ -15,6 +15,8 @@ return new class extends Migration {
             $table->string('username');
             $table->string('password');
             $table->enum('role', ['admin', 'desk'])->default('admin');
+            $table->boolean('status');
+            $table->boolean('online');
             $table->timestamps();
         });
     }
