@@ -30,4 +30,27 @@ class AdminController extends Controller
             return redirect()->back()->with('error', 'Invalid username or password');
         }
     }
+
+    public function form()
+    {
+        $admin = Admin::all();
+        return view('adminform', compact('admin'));
+    }
+
+    public function submit(Request $request)
+    {
+        $validatedData = $request->validate([
+            'username' => 'required|string|max:255',
+            'password' => 'required|string|max:255',
+            'role' => 'required|string|max:255'
+        ]);
+
+        Admin::create([
+            'username' => $validatedData['username'],
+            'password' => $validatedData['password'],
+            'role' => $validatedData['role']
+        ]);
+
+        return redirect('/dashboard');
+    }
 }

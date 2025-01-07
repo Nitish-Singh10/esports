@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\BgmiDuo;
 use App\Models\BgmiSolo;
 use App\Models\BgmiTeam;
@@ -15,7 +16,8 @@ class AddParticipantController extends Controller
 {
     public function index()
     {
-        return view('addform');
+        $admin = Admin::all();
+        return view('addform', compact('admin'));
     }
     public function submit(Request $request)
     {

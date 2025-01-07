@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\FreefireDuo;
 use App\Models\FreefireSolo;
 use App\Models\FreefireTeam;
@@ -13,7 +14,8 @@ class FreeFireController extends Controller
     {
         if (session()->has('username')) {
             $teams = FreefireTeam::all();
-            return view('freefire_team', compact('teams'));
+            $admin = Admin::all();
+            return view('freefire_team', compact('teams', 'admin'));
         } else {
             return redirect('/admin');
         }
@@ -22,8 +24,9 @@ class FreeFireController extends Controller
     public function duo()
     {
         if (session()->has('username')) {
+            $admin = Admin::all();
             $teams = FreefireDuo::all();
-            return view('freefire_duo', compact('teams'));
+            return view('freefire_duo', compact('teams', 'admin'));
         } else {
             return redirect('/admin');
         }
@@ -32,7 +35,8 @@ class FreeFireController extends Controller
     {
         if (session()->has('username')) {
             $teams = FreefireSolo::all();
-            return view('freefire_solo', compact('teams'));
+            $admin = Admin::all();
+            return view('freefire_solo', compact('teams', 'admin'));
         } else {
             return redirect('/admin');
         }

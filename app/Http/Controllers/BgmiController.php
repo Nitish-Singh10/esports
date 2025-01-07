@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\BgmiDuo;
 use App\Models\BgmiSolo;
 use Illuminate\Http\Request;
@@ -12,7 +13,8 @@ class BgmiController extends Controller
     {
         if (session()->has('username')) {
             $teams = BgmiDuo::all();
-            return view('bgmi_duo', compact('teams'));
+            $admin = Admin::all();
+            return view('bgmi_duo', compact('teams', 'admin'));
         } else {
             return redirect('/admin');
         }
@@ -22,7 +24,8 @@ class BgmiController extends Controller
     {
         if (session()->has('username')) {
             $teams = BgmiSolo::all();
-            return view('bgmi_solo', compact('teams'));
+            $admin = Admin::all();
+            return view('bgmi_solo', compact('teams', 'admin'));
         } else {
             return redirect('/admin');
         }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin;
 use App\Models\BgmiTeam;
 use Illuminate\Http\Request;
 
@@ -11,7 +12,8 @@ class DashboardController extends Controller
     {
         if (session()->has('username')) {
             $teams = BgmiTeam::all();
-            return view('bgmi_team', compact('teams'));
+            $admin = Admin::all();
+            return view('bgmi_team', compact('teams', 'admin'));
         } else {
             return redirect('/admin');
         }

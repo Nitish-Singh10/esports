@@ -37,6 +37,18 @@
                         <line x1="8" y1="12" x2="16" y2="12"></line>
                     </svg>
                 </a>
+                <a href="{{url('/admincreate')}}" class="{{ request()->is('admincreate')
+    ? 'h-10 w-12 dark:bg-gray-700 dark:text-white rounded-md flex items-center justify-center text-blue-500'
+    : 'h-10 w-12 dark:text-gray-500 rounded-md flex items-center justify-center' }}">
+                    <svg viewBox="0 0 24 24" class="h-5" stroke="currentColor" stroke-width="2" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <!-- Shield outline -->
+                        <path d="M12 2L20 6V12C20 16.4183 16.4183 20 12 22C7.58172 20 4 16.4183 4 12V6L12 2Z"></path>
+                        <!-- Checkmark -->
+                        <path d="M9 12L11 14L15 10"></path>
+                    </svg>
+                </a>
+
                 <a href={{url('/logout')}}
                     class="h-10 w-12 dark:text-gray-500 rounded-md flex items-center justify-center hover:dark:bg-gray-700 hover:dark:text-white hover:text-blue-500">
                     <svg viewBox="0 0 24 24" class="h-5" stroke="currentColor" stroke-width="2" fill="none"
@@ -58,20 +70,24 @@
                     <div class="text-xs text-gray-400 tracking-wider">USERS</div>
 
                     <div class="space-y-4 mt-3">
-                        <button class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
-                            <div
-                                class="flex xl:flex-row flex-col items-center font-medium text-gray-900 dark:text-white pb-2 mb-2 xl:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full">
-                                <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-0.3.5&q=80&fm=jpg&crop=faces&fit=crop&h=200&w=200&s=046c29138c1335ef8edee7daf521ba50"
-                                    class="w-7 h-7 mr-2 rounded-full" alt="profile" />
-                                Kathyrn Murphy
-                            </div>
-                            <div class="flex items-center w-full">
+                        @foreach($admin as $user)
+                            <button class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
                                 <div
-                                    class="text-xs py-1 px-2 leading-none dark:bg-gray-900 bg-blue-100 text-blue-500 rounded-md">
-                                    Design</div>
-                            </div>
-                        </button>
+                                    class="flex xl:flex-row flex-col items-center font-medium text-gray-900 dark:text-white pb-2 mb-2 xl:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full">
+                                    <img src="https://img.freepik.com/free-photo/3d-rendered-illustration-businessman-with-laptop-books_1057-45897.jpg?t=st=1736235929~exp=1736239529~hmac=4da6f4f6e2a583b59b8f6f888e0b3e60ad1babb838c01d1c6cd8f4c2da025997&w=1060"
+                                        class="w-7 h-7 mr-2 rounded-full" alt="profile" />
+                                    {{ $user->username }} <!-- Display the username -->
+                                </div>
+                                <div class="flex items-center w-full">
+                                    <div
+                                        class="text-xs py-1 px-2 leading-none dark:bg-gray-900 bg-blue-100 text-blue-500 rounded-md">
+                                        {{ $user->role }} <!-- Display the role -->
+                                    </div>
+                                </div>
+                            </button>
+                        @endforeach
                     </div>
+
                 </div>
                 <div class="flex-grow bg-white dark:bg-gray-900 overflow-y-auto">
                     <div
@@ -80,7 +96,7 @@
                             <div class="flex items-center text-3xl text-gray-900 dark:text-white">
                                 <img src="https://assets.codepen.io/344846/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1582611188&width=512"
                                     class="w-12 mr-4 rounded-full" alt="profile" />
-                                Mert Cukuren
+                                {{session('username')}}
                             </div>
                         </div>
                         <div class="flex items-center space-x-3 sm:mt-7 mt-4">
