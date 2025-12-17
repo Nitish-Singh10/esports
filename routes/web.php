@@ -16,6 +16,8 @@ use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 Route::get('/', function () {
     return view('home');
 });
+Route::post('/register', [DashboardController::class, 'store']);
+
 
 Route::middleware([OnlineStatusMiddleware::class])->group(function () {
     Route::get('/admin', [AdminController::class, 'index']);

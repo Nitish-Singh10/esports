@@ -17,13 +17,19 @@
     class="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-blue-900 flex items-center justify-center p-4">
 
     <div id="formCard" class="w-full max-w-3xl bg-white/95 backdrop-blur rounded-2xl shadow-2xl p-8 md:p-10">
+        @if(session('success'))
+            <div class="mb-6 p-4 rounded-lg bg-green-100 text-green-800 font-medium text-center">
+                ✅ {{ session('success') }}
+            </div>
+        @endif
+
 
         <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">
             🎮 Ekshetra Registration
         </h2>
 
-        <form method="POST" action="/register" class="space-y-6">
-
+        <form method="POST" action="{{ url('/register') }}" class="space-y-6">
+            @csrf
             <!-- Game & Category -->
             <div class="grid md:grid-cols-2 gap-6">
                 <div>
