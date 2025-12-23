@@ -36,6 +36,19 @@
                         <line x1="8" y1="12" x2="16" y2="12"></line>
                     </svg>
                 </a>
+                <a href="{{ url('/web') }}" class="{{ request()->is('web')
+    ? 'h-10 w-12 dark:bg-gray-700 dark:text-white rounded-md flex items-center justify-center text-blue-500'
+    : 'h-10 w-12 dark:text-gray-500 rounded-md flex items-center justify-center' }}">
+
+                    <svg viewBox="0 0 24 24" class="h-5" stroke="currentColor" stroke-width="2" fill="none"
+                        stroke-linecap="round" stroke-linejoin="round">
+
+                        <!-- Globe Icon -->
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <line x1="2" y1="12" x2="22" y2="12"></line>
+                        <path d="M12 2a15.3 15.3 0 0 1 0 20a15.3 15.3 0 0 1 0-20z"></path>
+                    </svg>
+                </a>
                 <a href="{{url('/admincreate')}}" class="{{ request()->is('admincreate')
     ? 'h-10 w-12 dark:bg-gray-700 dark:text-white rounded-md flex items-center justify-center text-blue-500'
     : 'h-10 w-12 dark:text-gray-500 rounded-md flex items-center justify-center' }}">
@@ -106,29 +119,31 @@
                 <div class="flex-grow bg-white dark:bg-gray-900 overflow-y-auto">
                     <div
                         class="sm:px-7 sm:pt-7 px-4 pt-4 flex flex-col w-full border-b border-gray-200 bg-white dark:bg-gray-900 dark:text-white dark:border-gray-800 sticky top-0">
-                        <div class="flex w-full items-center">
+                        <div class="flex w-full items-center mb-2">
                             <div class="flex items-center text-3xl text-gray-900 dark:text-white">
                                 <img src="https://assets.codepen.io/344846/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1582611188&width=512"
                                     class="w-12 mr-4 rounded-full" alt="profile" />
                                 {{session('username')}}
                             </div>
                         </div>
-                        <div class="flex items-center space-x-3 sm:mt-7 mt-4">
-                            @if (!request()->is('add'))
-                                <a href="{{ url('/dashboard') }}"
-                                    class="{{ request()->is('dashboard', 'bgmi_duo', 'bgmi_solo') ? 'px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5' : 'px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5' }}">
-                                    BGMI
-                                </a>
-                                <a href="{{ url('/freefire_team') }}"
-                                    class="{{ request()->is('freefire_team', 'freefire_duo', 'freefire_solo') ? 'px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5' : 'px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5' }}">
-                                    FREE FIRE
-                                </a>
-                                <a href="{{ url('/fcmobile') }}"
-                                    class="{{ request()->is('fcmobile') ? 'px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5' : 'px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5' }}">
-                                    FC MOBILE
-                                </a>
-                            @endif
-                        </div>
+                        @if(!request()->is('web'))
+                            <div class="flex items-center space-x-3 sm:mt-5 mt-3">
+                                @if (!request()->is('add'))
+                                    <a href="{{ url('/dashboard') }}"
+                                        class="{{ request()->is('dashboard', 'bgmi_duo', 'bgmi_solo') ? 'px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5' : 'px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5' }}">
+                                        BGMI
+                                    </a>
+                                    <a href="{{ url('/freefire_team') }}"
+                                        class="{{ request()->is('freefire_team', 'freefire_duo', 'freefire_solo') ? 'px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5' : 'px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5' }}">
+                                        FREE FIRE
+                                    </a>
+                                    <a href="{{ url('/fcmobile') }}"
+                                        class="{{ request()->is('fcmobile') ? 'px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5' : 'px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5' }}">
+                                        FC MOBILE
+                                    </a>
+                                @endif
+                            </div>
+                        @endif
                     </div>
                     <div class="sm:p-7 p-4">
                         @yield('section')

@@ -6,12 +6,10 @@ use App\Http\Controllers\BgmiController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FCController;
 use App\Http\Controllers\FreeFireController;
+use App\Http\Controllers\WebController;
 use App\Http\Middleware\OnlineStatusMiddleware;
 use App\Models\Admin;
-use App\Models\BgmiTeam;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::get('/', function () {
     return view('home');
@@ -34,6 +32,7 @@ Route::middleware([OnlineStatusMiddleware::class])->group(function () {
     Route::get('/admincreate', [AdminController::class, 'form']);
     Route::post('/adminsubmit', [AdminController::class, 'submit']);
     Route::get('/user_update/{id}/{status}', [AdminController::class, 'updatestatus']);
+    Route::get('/web', [WebController::class, 'index']);
 });
 
 
