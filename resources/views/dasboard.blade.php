@@ -14,7 +14,7 @@
         <div
             class="bg-white dark:bg-gray-900 dark:border-gray-800 w-20 flex-shrink-0 border-r border-gray-200 flex-col hidden sm:flex">
             <div class="h-16 text-blue-500 flex items-center justify-center">
-                <img src="log.png" alt="E-KSHETRA Logo" class="w-12 h-12 rounded-full">
+                <img src="favicon.png" alt="E-KSHETRA Logo" class="w-10 h-10">
             </div>
             <div class="flex mx-auto flex-grow mt-4 flex-col text-gray-400 space-y-4">
                 <a href="/dashboard" class="{{ request()->is('dashboard')
@@ -36,19 +36,21 @@
                         <line x1="8" y1="12" x2="16" y2="12"></line>
                     </svg>
                 </a>
-                <a href="{{ url('/web') }}" class="{{ request()->is('web')
-    ? 'h-10 w-12 dark:bg-gray-700 dark:text-white rounded-md flex items-center justify-center text-blue-500'
-    : 'h-10 w-12 dark:text-gray-500 rounded-md flex items-center justify-center' }}">
+                @if(session('role') === 'admin')
+                            <a href="{{ url('/web') }}" class="{{ request()->is('web')
+                    ? 'h-10 w-12 dark:bg-gray-700 dark:text-white rounded-md flex items-center justify-center text-blue-500'
+                    : 'h-10 w-12 dark:text-gray-500 rounded-md flex items-center justify-center' }}">
 
-                    <svg viewBox="0 0 24 24" class="h-5" stroke="currentColor" stroke-width="2" fill="none"
-                        stroke-linecap="round" stroke-linejoin="round">
+                                <svg viewBox="0 0 24 24" class="h-5" stroke="currentColor" stroke-width="2" fill="none"
+                                    stroke-linecap="round" stroke-linejoin="round">
 
-                        <!-- Globe Icon -->
-                        <circle cx="12" cy="12" r="10"></circle>
-                        <line x1="2" y1="12" x2="22" y2="12"></line>
-                        <path d="M12 2a15.3 15.3 0 0 1 0 20a15.3 15.3 0 0 1 0-20z"></path>
-                    </svg>
-                </a>
+                                    <!-- Globe Icon -->
+                                    <circle cx="12" cy="12" r="10"></circle>
+                                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                                    <path d="M12 2a15.3 15.3 0 0 1 0 20a15.3 15.3 0 0 1 0-20z"></path>
+                                </svg>
+                            </a>
+                @endif
                 <a href="{{url('/admincreate')}}" class="{{ request()->is('admincreate')
     ? 'h-10 w-12 dark:bg-gray-700 dark:text-white rounded-md flex items-center justify-center text-blue-500'
     : 'h-10 w-12 dark:text-gray-500 rounded-md flex items-center justify-center' }}">
@@ -70,9 +72,6 @@
                         <rect x="16" y="3" width="5" height="18" rx="1" />
                     </svg>
                 </a>
-
-
-
             </div>
         </div>
         <div class="flex-grow overflow-hidden h-full flex flex-col">
@@ -86,8 +85,7 @@
                             <button class="bg-white p-3 w-full flex flex-col rounded-md dark:bg-gray-800 shadow">
                                 <div
                                     class="flex xl:flex-row flex-col items-center font-medium text-gray-900 dark:text-white pb-2 mb-2 xl:border-b border-gray-200 border-opacity-75 dark:border-gray-700 w-full">
-                                    <img src="https://img.freepik.com/free-photo/3d-rendered-illustration-businessman-with-laptop-books_1057-45897.jpg?t=st=1736235929~exp=1736239529~hmac=4da6f4f6e2a583b59b8f6f888e0b3e60ad1babb838c01d1c6cd8f4c2da025997&w=1060"
-                                        class="w-7 h-7 mr-2 rounded-full" alt="profile" />
+                                    <img src="log.png" class="w-7 h-7 mr-2 rounded-full" alt="profile" />
                                     {{ $user->username }}
                                 </div>
 
@@ -121,8 +119,7 @@
                         class="sm:px-7 sm:pt-7 px-4 pt-4 flex flex-col w-full border-b border-gray-200 bg-white dark:bg-gray-900 dark:text-white dark:border-gray-800 sticky top-0">
                         <div class="flex w-full items-center mb-2">
                             <div class="flex items-center text-3xl text-gray-900 dark:text-white">
-                                <img src="https://assets.codepen.io/344846/internal/avatars/users/default.png?fit=crop&format=auto&height=512&version=1582611188&width=512"
-                                    class="w-12 mr-4 rounded-full" alt="profile" />
+                                <img src="log.png" class="w-12 mr-4 rounded-full" alt="profile" />
                                 {{session('username')}}
                             </div>
                         </div>
@@ -139,7 +136,19 @@
                                     </a>
                                     <a href="{{ url('/fcmobile') }}"
                                         class="{{ request()->is('fcmobile') ? 'px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5' : 'px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5' }}">
-                                        FC MOBILE
+                                        COD MOBILE
+                                    </a>
+                                    <a href="{{ url('/valorant_team') }}"
+                                        class="{{ request()->is('valorant_team') ? 'px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5' : 'px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5' }}">
+                                        VALORANT
+                                    </a>
+                                    <a href="{{ url('/e_football') }}"
+                                        class="{{ request()->is('e_football') ? 'px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5' : 'px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5' }}">
+                                        E FOOTBALL
+                                    </a>
+                                    <a href="{{ url('/clash_royal') }}"
+                                        class="{{ request()->is('clash_royal') ? 'px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5' : 'px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5' }}">
+                                        CLASH ROYAL
                                     </a>
                                 @endif
                             </div>
