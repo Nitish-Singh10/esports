@@ -3,19 +3,32 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
-use App\Models\FCSolo;
+use App\Models\CodSolo;
+use App\Models\CodTeam;
 use Illuminate\Http\Request;
 
 class FCController extends Controller
 {
-    public function solo()
+    public function team()
     {
         if (session()->has('username')) {
-            $teams = FCSolo::all();
+            $teams = CodTeam::all();
             $admin = Admin::all();
-            return view('fcmobile', compact('teams', 'admin'));
+            return view('cod_mobile_team', compact('teams', 'admin'));
         } else {
             return redirect('/admin');
         }
+    }
+
+    public function solo()
+    {
+        if (session()->has('username')) {
+            $teams = CodSolo::latest()->get();
+            $admin = Admin::all();
+            return view('cod_mobile_solo', compact('teams', 'admin'));
+        } else {
+            return redirect('/admin');
+        }
+
     }
 }

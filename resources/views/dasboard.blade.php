@@ -134,8 +134,8 @@
                                         class="{{ request()->is('freefire_team', 'freefire_duo', 'freefire_solo') ? 'px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5' : 'px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5' }}">
                                         FREE FIRE
                                     </a>
-                                    <a href="{{ url('/fcmobile') }}"
-                                        class="{{ request()->is('fcmobile') ? 'px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5' : 'px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5' }}">
+                                    <a href="{{ url('/cod_mobile_team') }}"
+                                        class="{{ request()->is('cod_mobile_team') ? 'px-3 border-b-2 border-blue-500 text-blue-500 dark:text-white dark:border-white pb-1.5' : 'px-3 border-b-2 border-transparent text-gray-600 dark:text-gray-400 pb-1.5' }}">
                                         COD MOBILE
                                     </a>
                                     <a href="{{ url('/valorant_team') }}"

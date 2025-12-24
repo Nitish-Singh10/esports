@@ -6,6 +6,8 @@ use App\Models\Admin;
 use App\Models\BgmiDuo;
 use App\Models\BgmiSolo;
 use App\Models\BgmiTeam;
+use App\Models\CodSolo;
+use App\Models\CodTeam;
 use App\Models\FCSolo;
 use App\Models\FreefireDuo;
 use App\Models\FreefireSolo;

@@ -28,7 +28,8 @@ Route::middleware([OnlineStatusMiddleware::class])->group(function () {
     Route::get('/freefire_team', [FreeFireController::class, 'team']);
     Route::get('/freefire_duo', [FreeFireController::class, 'duo']);
     Route::get('/freefire_solo', [FreeFireController::class, 'solo']);
-    Route::get('/fcmobile', [FCController::class, 'solo']);
+    Route::get('/cod_mobile_team', [FCController::class, 'team']);
+    Route::get('/cod_mobile_solo', [FCController::class, 'solo']);
     Route::get('/admincreate', [AdminController::class, 'form']);
     Route::post('/adminsubmit', [AdminController::class, 'submit']);
     Route::get('/user_update/{id}/{status}', [AdminController::class, 'updatestatus']);
