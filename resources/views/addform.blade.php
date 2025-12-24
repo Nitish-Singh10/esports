@@ -253,6 +253,8 @@
         document.addEventListener('DOMContentLoaded', () => {
             const game = document.getElementById('game');
             const category = document.getElementById('category');
+            const payment = document.getElementById('payment');
+            const transaction = document.querySelector('input[name="transaction"]');
 
             const data = {
                 FREE_FIRE: { categories: { Solo: 75, Duo: 150, Squad: 300 } },
@@ -263,6 +265,7 @@
                 CLASH_ROYALE: { price: 60 }
             };
 
+            // Game → Category logic
             game.addEventListener('change', () => {
                 category.innerHTML = '<option value="">Select Category</option>';
 
@@ -283,6 +286,20 @@
                     category.appendChild(opt);
                 }
             });
+
+            // 💰 Payment → Transaction logic
+            payment.addEventListener('change', () => {
+                if (payment.value === 'cash') {
+                    transaction.value = 'CASH';
+                    transaction.setAttribute('readonly', true);
+                } else {
+                    transaction.value = '';
+                    transaction.removeAttribute('readonly');
+                }
+            });
+
+            // Trigger once on page load
+            payment.dispatchEvent(new Event('change'));
         });
     </script>
 

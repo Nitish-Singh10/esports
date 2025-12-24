@@ -21,99 +21,89 @@ class AddParticipantController extends Controller
     }
     public function submit(Request $request)
     {
-        $validatedData = $request->validate([
-            'game' => 'required|string|max:255',
-            'type' => 'required|string|max:255',
+        $validated = $request->validate([
+            'game' => 'required|string',
+            'category' => 'required|string',
             'fullname' => 'required|string|max:255',
             'class' => 'nullable|string|max:255',
-            'rollno' => 'required|string|max:255',
-            'phoneno' => 'required|string|max:255',
+            'rollno' => 'nullable|string|max:255',
+            'phoneno' => 'required|string|max:20',
             'email' => 'required|email|max:255',
-            'payment' => 'required|string|max:255',
+            'payment' => 'required|in:upi,cash',
             'transaction' => 'nullable|string|max:255',
+            'college' => 'required|string|max:255',
         ]);
 
-        if ($validatedData['game'] === "BGMI") {
-            if ($validatedData['type'] === "Team") {
-                BgmiTeam::create([
-                    'name' => $validatedData['fullname'],
-                    'class' => $validatedData['class'],
-                    'rollno' => $validatedData['rollno'],
-                    'phone_no' => $validatedData['phoneno'],
-                    'email' => $validatedData['email'],
-                    'pay_mode' => $validatedData['payment'],
-                    'transaction_id' => $validatedData['transaction'],
-                ]);
-                return redirect('/dashboard');
-            } elseif ($validatedData['type'] === "Duo") {
-                BgmiDuo::create([
-                    'name' => $validatedData['fullname'],
-                    'class' => $validatedData['class'],
-                    'rollno' => $validatedData['rollno'],
-                    'phone_no' => $validatedData['phoneno'],
-                    'email' => $validatedData['email'],
-                    'pay_mode' => $validatedData['payment'],
-                    'transaction_id' => $validatedData['transaction'],
-                ]);
-                return redirect('/bgmi_duo');
-            } elseif ($validatedData['type'] === "Solo") {
-                BgmiSolo::create([
-                    'name' => $validatedData['fullname'],
-                    'class' => $validatedData['class'],
-                    'rollno' => $validatedData['rollno'],
-                    'phone_no' => $validatedData['phoneno'],
-                    'email' => $validatedData['email'],
-                    'pay_mode' => $validatedData['payment'],
-                    'transaction_id' => $validatedData['transaction'],
-                ]);
-                return redirect('/bgmi_solo');
+        $commonData = [
+            'name' => $validated['fullname'],
+            'class' => $validated['class'],
+            'rollno' => $validated['rollno'],
+            'phone_no' => $validated['phoneno'],
+            'email' => $validated['email'],
+            'pay_mode' => $validated['payment'],
+            'transaction_id' => $validated['transaction'] ?? 'CASH',
+            'college' => $validated['college'],
+            'added_by' => auth()->user()->name ?? 'admin',
+            'slot' => 'TBD',
+        ];
+
+        /* ---------------- BGMI ---------------- */
+        if ($validated['game'] === 'BGMI') {
+
+            if ($validated['category'] === 'Squad') {
+                BgmiTeam::create($commonData);
+                return redirect()->back()->with('success', 'BGMI Squad registered');
             }
-        } elseif ($validatedData['game'] === "FREEFIRE") {
-            if ($validatedData['type'] === "Team") {
-                FreefireTeam::create([
-                    'name' => $validatedData['fullname'],
-                    'class' => $validatedData['class'],
-                    'rollno' => $validatedData['rollno'],
-                    'phone_no' => $validatedData['phoneno'],
-                    'email' => $validatedData['email'],
-                    'pay_mode' => $validatedData['payment'],
-                    'transaction_id' => $validatedData['transaction'],
-                ]);
-                return redirect('/freefire_team');
-            } elseif ($validatedData['type'] === "Duo") {
-                FreefireDuo::create([
-                    'name' => $validatedData['fullname'],
-                    'class' => $validatedData['class'],
-                    'rollno' => $validatedData['rollno'],
-                    'phone_no' => $validatedData['phoneno'],
-                    'email' => $validatedData['email'],
-                    'pay_mode' => $validatedData['payment'],
-                    'transaction_id' => $validatedData['transaction'],
-                ]);
-                return redirect('/freefire_duo');
-            } elseif ($validatedData['type'] === "Solo") {
-                FreefireSolo::create([
-                    'name' => $validatedData['fullname'],
-                    'class' => $validatedData['class'],
-                    'rollno' => $validatedData['rollno'],
-                    'phone_no' => $validatedData['phoneno'],
-                    'email' => $validatedData['email'],
-                    'pay_mode' => $validatedData['payment'],
-                    'transaction_id' => $validatedData['transaction'],
-                ]);
-                return redirect('/freefire_solo');
+
+            if ($validated['category'] === 'Duo') {
+                BgmiDuo::create($commonData);
+                return redirect()->back()->with('success', 'BGMI Duo registered');
             }
-        } elseif ($validatedData['game'] === "FC") {
-            FCSolo::create([
-                'name' => $validatedData['fullname'],
-                'class' => $validatedData['class'],
-                'rollno' => $validatedData['rollno'],
-                'phone_no' => $validatedData['phoneno'],
-                'email' => $validatedData['email'],
-                'pay_mode' => $validatedData['payment'],
-                'transaction_id' => $validatedData['transaction'],
-            ]);
-            return redirect('/fcmobile');
+
+            if ($validated['category'] === 'Solo') {
+                BgmiSolo::create($commonData);
+                return redirect()->back()->with('success', 'BGMI Solo registered');
+            }
         }
+
+        /* ---------------- FREE FIRE ---------------- */
+        if ($validated['game'] === 'FREE_FIRE') {
+
+            if ($validated['category'] === 'Squad') {
+                FreefireTeam::create($commonData);
+                return redirect()->back()->with('success', 'Free Fire Squad registered');
+            }
+
+            if ($validated['category'] === 'Duo') {
+                FreefireDuo::create($commonData);
+                return redirect()->back()->with('success', 'Free Fire Duo registered');
+            }
+
+            if ($validated['category'] === 'Solo') {
+                FreefireSolo::create($commonData);
+                return redirect()->back()->with('success', 'Free Fire Solo registered');
+            }
+        }
+
+        /* ---------------- COD / VALORANT ---------------- */
+        if (in_array($validated['game'], ['COD', 'VALORANT'])) {
+
+            if ($validated['category'] === 'Per Team') {
+                CodTeam::create($commonData); // if exists
+            } else {
+                CodSolo::create($commonData); // if exists
+            }
+
+            return redirect()->back()->with('success', 'Registration successful');
+        }
+
+        /* ---------------- EFOOTBALL / CLASH ROYALE ---------------- */
+        if (in_array($validated['game'], ['EFOOTBALL', 'CLASH_ROYALE'])) {
+            GameSolo::create($commonData); // generic solo table
+            return redirect()->back()->with('success', 'Registration successful');
+        }
+
+        return back()->with('error', 'Invalid game or category');
     }
+
 }
