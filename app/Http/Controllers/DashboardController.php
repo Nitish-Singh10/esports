@@ -50,4 +50,14 @@ class DashboardController extends Controller
 
         return redirect()->back()->with('success', 'Registration successful!');
     }
+
+    public function verify($id)
+    {
+        $registration = GameRegistration::findOrFail($id);
+
+        $registration->verified = 1;
+        $registration->save();
+
+        return back()->with('success', 'Registration verified successfully');
+    }
 }

@@ -33,6 +33,8 @@ Route::middleware([OnlineStatusMiddleware::class])->group(function () {
     Route::post('/adminsubmit', [AdminController::class, 'submit']);
     Route::get('/user_update/{id}/{status}', [AdminController::class, 'updatestatus']);
     Route::get('/web', [WebController::class, 'index']);
+    Route::post('/game-registration/{id}/verify', [DashboardController::class, 'verify'])
+        ->name('game-registration.verify');
 });
 
 

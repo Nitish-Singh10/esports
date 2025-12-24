@@ -92,18 +92,25 @@
                         </td>
 
                         <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
+
                             @if($reg->verified)
                                 <span style="color: black;"
                                     class="px-3 py-1 text-xs rounded-full bg-green-100 !text-black dark:bg-green-900 !dark:text-black">
                                     Verified
                                 </span>
                             @else
-                                <span style="color: black;"
-                                    class="px-3 py-1 text-xs rounded-full bg-yellow-100 !text-black dark:bg-yellow-900 !dark:text-black">
-                                    Pending
-                                </span>
+                                <form action="{{ route('game-registration.verify', $reg->id) }}" method="POST"
+                                    onsubmit="return confirm('Mark this registration as verified?')" class="inline">
+                                    @csrf
+                                    <button type="submit" style="color: black;"
+                                        class="px-3 py-1 text-xs rounded-full bg-yellow-100 !text-black dark:bg-yellow-900 !dark:text-black hover:bg-yellow-200 transition">
+                                        Pending
+                                    </button>
+                                </form>
                             @endif
+
                         </td>
+
                     </tr>
                 @empty
                     <tr>
