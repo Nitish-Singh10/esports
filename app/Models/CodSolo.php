@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class FCSolo extends Model
+class CodSolo extends Model
 {
     use HasFactory;
 
-    protected $table = 'fc_solo';
-
+    protected $table = 'cod_mobile_solo';
 
     protected $fillable = [
         'name',
@@ -20,6 +19,14 @@ class FCSolo extends Model
         'email',
         'pay_mode',
         'transaction_id',
+        'college',
         'amount',
+        'added_by',
+        'verified',
+        'slot',
+    ];
+
+    protected $casts = [
+        'verified' => 'boolean',
     ];
 }

@@ -19,7 +19,11 @@ return new class extends Migration {
             $table->string('email');
             $table->enum('pay_mode', ['upi', 'cash']);
             $table->string('transaction_id');
-            $table->string('amount')->default(50);
+            $table->string('college');
+            $table->string('amount')->default(350);
+            $table->string('added_by');
+            $table->boolean('verified')->default(0);
+            $table->string('slot');
             $table->timestamps();
         });
         Schema::create('cod_mobile_solo', function (Blueprint $table) {
@@ -31,7 +35,11 @@ return new class extends Migration {
             $table->string('email');
             $table->enum('pay_mode', ['upi', 'cash']);
             $table->string('transaction_id');
-            $table->string('amount')->default(50);
+            $table->string('college');
+            $table->string('amount')->default(75);
+            $table->string('added_by');
+            $table->boolean('verified')->default(0);
+            $table->string('slot');
             $table->timestamps();
         });
         DB::statement("ALTER TABLE cod_mobile_team AUTO_INCREMENT = 2601;");
