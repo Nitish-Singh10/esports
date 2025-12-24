@@ -11,6 +11,7 @@
 
     <!-- GSAP -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 </head>
 
 <body

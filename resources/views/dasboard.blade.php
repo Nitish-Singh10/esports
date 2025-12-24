@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>@yield('title', 'Dashboard')</title>
     <link href="https://assets.codepen.io/344846/style.css" rel="stylesheet">
-
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}">
 </head>
 
 <body>
