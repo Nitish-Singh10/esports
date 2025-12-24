@@ -11,7 +11,6 @@ class FreefireTeam extends Model
 
     protected $table = 'freefire_team';
 
-
     protected $fillable = [
         'name',
         'class',
@@ -20,6 +19,14 @@ class FreefireTeam extends Model
         'email',
         'pay_mode',
         'transaction_id',
+        'college',
         'amount',
+        'added_by',
+        'verified',
+        'slot',
+    ];
+
+    protected $casts = [
+        'verified' => 'boolean',
     ];
 }

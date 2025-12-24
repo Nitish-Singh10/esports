@@ -13,45 +13,57 @@ return new class extends Migration {
         Schema::create('freefire_team', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('class');
-            $table->string('rollno');
+            $table->string('class')->nullable();
+            $table->string('rollno')->nullable();
             $table->string('phone_no');
             $table->string('email');
             $table->enum('pay_mode', ['upi', 'cash']);
             $table->string('transaction_id');
-            $table->string('amount')->default(200);
+            $table->string('college');
+            $table->string('amount')->default(300);
+            $table->string('added_by');
+            $table->boolean('verified')->default(0);
+            $table->string('slot');
             $table->timestamps();
         });
 
         Schema::create('freefire_duo', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('class');
-            $table->string('rollno');
+            $table->string('class')->nullable();
+            $table->string('rollno')->nullable();
             $table->string('phone_no');
             $table->string('email');
             $table->enum('pay_mode', ['upi', 'cash']);
             $table->string('transaction_id');
-            $table->string('amount')->default(100);
+            $table->string('college');
+            $table->string('amount')->default(150);
+            $table->string('added_by');
+            $table->boolean('verified')->default(0);
+            $table->string('slot');
             $table->timestamps();
         });
 
         Schema::create('freefire_solo', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('class');
-            $table->string('rollno');
+            $table->string('class')->nullable();
+            $table->string('rollno')->nullable();
             $table->string('phone_no');
             $table->string('email');
             $table->enum('pay_mode', ['upi', 'cash']);
             $table->string('transaction_id');
-            $table->string('amount')->default(50);
+            $table->string('college');
+            $table->string('amount')->default(75);
+            $table->string('added_by');
+            $table->boolean('verified')->default(0);
+            $table->string('slot');
             $table->timestamps();
         });
 
-        DB::statement("ALTER TABLE freefire_team AUTO_INCREMENT = 2501;");
-        DB::statement("ALTER TABLE freefire_duo AUTO_INCREMENT = 2501;");
-        DB::statement("ALTER TABLE freefire_solo AUTO_INCREMENT = 2501;");
+        DB::statement("ALTER TABLE freefire_team AUTO_INCREMENT = 2601;");
+        DB::statement("ALTER TABLE freefire_duo AUTO_INCREMENT = 2601;");
+        DB::statement("ALTER TABLE freefire_solo AUTO_INCREMENT = 2601;");
 
     }
 

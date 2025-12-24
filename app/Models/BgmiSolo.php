@@ -11,7 +11,6 @@ class BgmiSolo extends Model
 
     protected $table = 'bgmi_solo';
 
-
     protected $fillable = [
         'name',
         'class',
@@ -20,6 +19,14 @@ class BgmiSolo extends Model
         'email',
         'pay_mode',
         'transaction_id',
+        'college',
         'amount',
+        'added_by',
+        'verified',
+        'slot',
+    ];
+
+    protected $casts = [
+        'verified' => 'boolean',
     ];
 }

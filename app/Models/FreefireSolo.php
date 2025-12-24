@@ -4,12 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 class FreefireSolo extends Model
 {
     use HasFactory;
 
     protected $table = 'freefire_solo';
-
 
     protected $fillable = [
         'name',
@@ -19,6 +19,14 @@ class FreefireSolo extends Model
         'email',
         'pay_mode',
         'transaction_id',
+        'college',
         'amount',
+        'added_by',
+        'verified',
+        'slot',
+    ];
+
+    protected $casts = [
+        'verified' => 'boolean',
     ];
 }

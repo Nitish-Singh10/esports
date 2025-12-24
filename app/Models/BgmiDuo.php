@@ -11,7 +11,6 @@ class BgmiDuo extends Model
 
     protected $table = 'bgmi_duo';
 
-
     protected $fillable = [
         'name',
         'class',
@@ -20,7 +19,14 @@ class BgmiDuo extends Model
         'email',
         'pay_mode',
         'transaction_id',
+        'college',
         'amount',
+        'added_by',
+        'verified',
+        'slot',
     ];
 
+    protected $casts = [
+        'verified' => 'boolean',
+    ];
 }

@@ -11,7 +11,6 @@ class BgmiTeam extends Model
 
     protected $table = 'bgmi_team';
 
-
     protected $fillable = [
         'name',
         'class',
@@ -20,7 +19,14 @@ class BgmiTeam extends Model
         'email',
         'pay_mode',
         'transaction_id',
+        'college',
         'amount',
+        'added_by',
+        'verified',
+        'slot',
     ];
 
+    protected $casts = [
+        'verified' => 'boolean',
+    ];
 }

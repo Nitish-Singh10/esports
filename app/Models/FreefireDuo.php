@@ -11,7 +11,6 @@ class FreefireDuo extends Model
 
     protected $table = 'freefire_duo';
 
-
     protected $fillable = [
         'name',
         'class',
@@ -20,6 +19,14 @@ class FreefireDuo extends Model
         'email',
         'pay_mode',
         'transaction_id',
+        'college',
         'amount',
+        'added_by',
+        'verified',
+        'slot',
+    ];
+
+    protected $casts = [
+        'verified' => 'boolean',
     ];
 }

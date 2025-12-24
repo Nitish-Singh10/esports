@@ -10,11 +10,11 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('fc_solo', function (Blueprint $table) {
+        Schema::create('cod_mobile_team', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('class');
-            $table->string('rollno');
+            $table->string('class')->nullable();
+            $table->string('rollno')->nullable();
             $table->string('phone_no');
             $table->string('email');
             $table->enum('pay_mode', ['upi', 'cash']);
@@ -22,7 +22,20 @@ return new class extends Migration {
             $table->string('amount')->default(50);
             $table->timestamps();
         });
-        DB::statement("ALTER TABLE fc_solo AUTO_INCREMENT = 2501;");
+        Schema::create('cod_mobile_solo', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('class')->nullable();
+            $table->string('rollno')->nullable();
+            $table->string('phone_no');
+            $table->string('email');
+            $table->enum('pay_mode', ['upi', 'cash']);
+            $table->string('transaction_id');
+            $table->string('amount')->default(50);
+            $table->timestamps();
+        });
+        DB::statement("ALTER TABLE cod_mobile_team AUTO_INCREMENT = 2601;");
+        DB::statement("ALTER TABLE cod_mobile_solo AUTO_INCREMENT = 2601;");
     }
 
     /**
