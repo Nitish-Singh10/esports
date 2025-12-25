@@ -260,7 +260,7 @@
                 FREE_FIRE: { categories: { Solo: 75, Duo: 150, Squad: 300 } },
                 BGMI: { categories: { Solo: 75, Duo: 150, Squad: 300 } },
                 COD: { categories: { "Per Team": 350, "Per Player": 70 } },
-                VALORANT: { categories: { "Per Team": 400, "Per Player": 80 } },
+                VALORANT: { price: 400 },
                 EFOOTBALL: { price: 60 },
                 CLASH_ROYALE: { price: 60 }
             };

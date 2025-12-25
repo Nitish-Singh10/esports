@@ -6,12 +6,15 @@ use App\Models\Admin;
 use App\Models\BgmiDuo;
 use App\Models\BgmiSolo;
 use App\Models\BgmiTeam;
+use App\Models\ClashRoyal;
 use App\Models\CodSolo;
 use App\Models\CodTeam;
+use App\Models\EFootball;
 use App\Models\FCSolo;
 use App\Models\FreefireDuo;
 use App\Models\FreefireSolo;
 use App\Models\FreefireTeam;
+use App\Models\Valorant;
 use Illuminate\Http\Request;
 
 class AddParticipantController extends Controller
@@ -87,22 +90,26 @@ class AddParticipantController extends Controller
             }
         }
 
-        /* ---------------- COD / VALORANT ---------------- */
-        if (in_array($validated['game'], ['COD', 'VALORANT'])) {
-
-            if ($validated['category'] === 'Per Team') {
-                CodTeam::create($commonData); // if exists
-            } else {
-                CodSolo::create($commonData); // if exists
+        /* ---------------- VALORANT ---------------- */
+        if ($validated['game'] === 'VALORANT') {
+            if ($validated['category'] === 'Solo') {
+                Valorant::create($commonData);
+                return redirect()->back()->with('success', 'Free Fire Squad registered');
             }
-
-            return redirect()->back()->with('success', 'Registration successful');
         }
 
         /* ---------------- EFOOTBALL / CLASH ROYALE ---------------- */
-        if (in_array($validated['game'], ['EFOOTBALL', 'CLASH_ROYALE'])) {
-            GameSolo::create($commonData); // generic solo table
-            return redirect()->back()->with('success', 'Registration successful');
+        if ($validated['game'] === 'EFOOTBALL') {
+            if ($validated['category'] === 'Solo') {
+                EFootball::create($commonData);
+                return redirect()->back()->with('success', 'Free Fire Squad registered');
+            }
+        }
+        if ($validated['game'] === 'CLASH_ROYALE') {
+            if ($validated['category'] === 'Solo') {
+                ClashRoyal::create($commonData);
+                return redirect()->back()->with('success', 'Free Fire Squad registered');
+            }
         }
 
         return back()->with('error', 'Invalid game or category');

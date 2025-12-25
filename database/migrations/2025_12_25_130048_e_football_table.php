@@ -10,23 +10,7 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('cod_mobile_team', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->string('class')->nullable();
-            $table->string('rollno')->nullable();
-            $table->string('phone_no');
-            $table->string('email');
-            $table->enum('pay_mode', ['upi', 'cash']);
-            $table->string('transaction_id');
-            $table->string('college');
-            $table->string('amount')->default(350);
-            $table->string('added_by');
-            $table->boolean('verified')->default(0);
-            $table->string('slot')->nullable();
-            $table->timestamps();
-        });
-        Schema::create('cod_mobile_solo', function (Blueprint $table) {
+        Schema::create('e_football', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('class')->nullable();

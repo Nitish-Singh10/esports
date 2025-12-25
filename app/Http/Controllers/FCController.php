@@ -31,4 +31,21 @@ class FCController extends Controller
         }
 
     }
+    public function verifyTeam($id)
+    {
+        $team = CodTeam::findOrFail($id);
+        $team->verified = 1;
+        $team->save();
+
+        return redirect()->back()->with('success', 'Team verified successfully!');
+    }
+
+    public function verifySolo($id)
+    {
+        $team = CodSolo::findOrFail($id);
+        $team->verified = 1;
+        $team->save();
+
+        return redirect()->back()->with('success', 'Team verified successfully!');
+    }
 }

@@ -23,7 +23,7 @@ return new class extends Migration {
             $table->string('amount')->default(300);
             $table->string('added_by');
             $table->boolean('verified')->default(0);
-            $table->string('slot');
+            $table->string('slot')->nullable();
             $table->timestamps();
         });
 
@@ -40,7 +40,7 @@ return new class extends Migration {
             $table->string('amount')->default(150);
             $table->string('added_by');
             $table->boolean('verified')->default(0);
-            $table->string('slot');
+            $table->string('slot')->nullable();
             $table->timestamps();
         });
 
@@ -57,14 +57,9 @@ return new class extends Migration {
             $table->string('amount')->default(75);
             $table->string('added_by');
             $table->boolean('verified')->default(0);
-            $table->string('slot');
+            $table->string('slot')->nullable();
             $table->timestamps();
         });
-
-        DB::statement("ALTER TABLE freefire_team AUTO_INCREMENT = 2601;");
-        DB::statement("ALTER TABLE freefire_duo AUTO_INCREMENT = 2601;");
-        DB::statement("ALTER TABLE freefire_solo AUTO_INCREMENT = 2601;");
-
     }
 
     /**

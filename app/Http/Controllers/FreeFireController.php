@@ -41,4 +41,33 @@ class FreeFireController extends Controller
             return redirect('/admin');
         }
     }
+    public function verifyTeam($id)
+    {
+
+        if (!session()->has('username')) {
+            return redirect('/admin');
+        }
+
+        $team = FreefireTeam::findOrFail($id);
+        $team->verified = 1;
+        $team->save();
+
+        return back()->with('success', 'Free Fire Team verified successfully');
+    }
+    public function verifyDuo($id)
+    {
+        $team = FreefireDuo::findOrFail($id);
+        $team->verified = 1;
+        $team->save();
+
+        return redirect()->back()->with('success', 'Team verified successfully!');
+    }
+    public function verifySolo($id)
+    {
+        $team = FreefireSolo::findOrFail($id);
+        $team->verified = 1;
+        $team->save();
+
+        return redirect()->back()->with('success', 'Team verified successfully!');
+    }
 }
