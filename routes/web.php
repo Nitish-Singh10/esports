@@ -18,6 +18,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('home');
 });
+
 Route::post('/register', [DashboardController::class, 'store']);
 
 Route::middleware([OnlineStatusMiddleware::class])->group(function () {
@@ -45,16 +46,10 @@ Route::middleware([OnlineStatusMiddleware::class])->group(function () {
     Route::post('/bgmi-solo/{id}/verify', [BgmiController::class, 'verifySolo'])->name('bgmi.solo.verify');
     Route::post('/freefire-team/{id}/verify', [FreefireController::class, 'verifyTeam'])->name('freefire.team.verify');
     Route::get('/clash_royal', [ClashRoyalController::class, 'index']);
-    Route::post(
-        '/freefire/duo/verify/{id}',
-        [FreeFireController::class, 'verifyDuo']
-    )->name('freefire.duo.verify');
-    Route::post('/freefire-solo/{id}/verify', [FreefireController::class, 'verifySolo'])
-        ->name('freefire.solo.verify');
-    Route::post('/cod_team/{id}/verify', [FCController::class, 'verifyTeam'])
-        ->name('cod_team.team.verify');
-    Route::post('/cod_solo/{id}/verify', [FCController::class, 'verifySolo'])
-        ->name('cod_team.solo.verify');
+    Route::post('/freefire/duo/verify/{id}', [FreeFireController::class, 'verifyDuo'])->name('freefire.duo.verify');
+    Route::post('/freefire-solo/{id}/verify', [FreefireController::class, 'verifySolo'])->name('freefire.solo.verify');
+    Route::post('/cod_team/{id}/verify', [FCController::class, 'verifyTeam'])->name('cod_team.team.verify');
+    Route::post('/cod_solo/{id}/verify', [FCController::class, 'verifySolo'])->name('cod_team.solo.verify');
 });
 
 Route::get('/session', function () {

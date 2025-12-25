@@ -49,6 +49,7 @@ return new class extends Migration {
         Schema::create('freefire_solo', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('team_id')->unique();
             $table->string('class')->nullable();
             $table->string('rollno')->nullable();
             $table->string('phone_no');

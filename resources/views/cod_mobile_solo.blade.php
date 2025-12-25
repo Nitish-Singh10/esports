@@ -61,7 +61,7 @@
                 @forelse($teams as $team)
                     <tr>
                         <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
-                            {{ 'CODSO' . $team->id }}
+                            {{$team['team_id'] }}
                         </td>
 
                         <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800">
