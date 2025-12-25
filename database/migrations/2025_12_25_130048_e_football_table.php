@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('e_football', function (Blueprint $table) {
             $table->id();
+            $table->string('team_id')->unique();
             $table->string('name');
             $table->string('class')->nullable();
             $table->string('rollno')->nullable();

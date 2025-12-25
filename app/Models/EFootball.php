@@ -14,6 +14,7 @@ class EFootball extends Model
 
     // Mass assignable fields
     protected $fillable = [
+        'team_id',
         'name',
         'class',
         'rollno',

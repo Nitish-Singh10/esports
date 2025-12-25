@@ -12,6 +12,7 @@ class BgmiDuo extends Model
     protected $table = 'bgmi_duo';
 
     protected $fillable = [
+        'team_id',
         'name',
         'class',
         'rollno',

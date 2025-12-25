@@ -116,9 +116,7 @@
                     </tr>
                 @empty
                     <tr>
-                        <td colspan="7" class="text-center py-6 text-gray-400">
-                            No COD Mobile Solo registrations found
-                        </td>
+
                     </tr>
                 @endforelse
             </tbody>

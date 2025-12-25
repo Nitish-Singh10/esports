@@ -11,6 +11,7 @@ class Valorant extends Model
     protected $table = 'valorant';
 
     protected $fillable = [
+        'team_id',
         'name',
         'class',
         'rollno',

@@ -12,6 +12,7 @@ class CodSolo extends Model
     protected $table = 'cod_mobile_solo';
 
     protected $fillable = [
+        'team_id',
         'name',
         'class',
         'rollno',

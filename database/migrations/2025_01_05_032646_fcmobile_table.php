@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('cod_mobile_team', function (Blueprint $table) {
             $table->id();
+            $table->string('team_id')->unique();
             $table->string('name');
             $table->string('class')->nullable();
             $table->string('rollno')->nullable();
@@ -28,6 +29,7 @@ return new class extends Migration {
         });
         Schema::create('cod_mobile_solo', function (Blueprint $table) {
             $table->id();
+            $table->string('team_id')->unique();
             $table->string('name');
             $table->string('class')->nullable();
             $table->string('rollno')->nullable();

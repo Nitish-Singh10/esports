@@ -24,6 +24,50 @@ class AddParticipantController extends Controller
         $admin = Admin::all();
         return view('addform', compact('admin'));
     }
+
+    /**
+     * Generate unique registration ID
+     */
+    private function generateRegistrationId(string $game, string $category): string
+    {
+        $prefixMap = [
+            'BGMI' => [
+                'Squad' => 'BGTE',
+                'Duo' => 'BGDO',
+                'Solo' => 'BGSO',
+            ],
+            'FREE_FIRE' => [
+                'Squad' => 'FFTE',
+                'Duo' => 'FFDO',
+                'Solo' => 'FFSO',
+            ],
+            'VALORANT' => [
+                'Solo' => 'VLSO',
+            ],
+            'EFOOTBALL' => [
+                'Solo' => 'EFSO',
+            ],
+            'CLASH_ROYALE' => [
+                'Solo' => 'CRSO',
+            ],
+            'COD' => [
+                'Solo' => 'CDSO',
+                'Squad' => 'CDTE',
+            ],
+            'FC' => [
+                'Solo' => 'FCSO',
+            ],
+        ];
+
+        $prefix = $prefixMap[$game][$category] ?? 'GEN';
+
+        // HHMMSS + random → 5 digits
+        $timePart = now()->format('His');
+        $randomPart = random_int(10000, 99999);
+
+        return $prefix . substr($timePart . $randomPart, 0, 5);
+    }
+
     public function submit(Request $request)
     {
         $validated = $request->validate([
@@ -39,7 +83,14 @@ class AddParticipantController extends Controller
             'college' => 'required|string|max:255',
         ]);
 
+        // Generate registration ID
+        $registrationId = $this->generateRegistrationId(
+            $validated['game'],
+            $validated['category']
+        );
+
         $commonData = [
+            'team_id' => $registrationId,
             'name' => $validated['fullname'],
             'class' => $validated['class'],
             'rollno' => $validated['rollno'],
@@ -49,70 +100,62 @@ class AddParticipantController extends Controller
             'transaction_id' => $validated['transaction'] ?? 'CASH',
             'college' => $validated['college'],
             'added_by' => auth()->user()->name ?? 'admin',
-            'slot' => 'TBD',
         ];
 
         /* ---------------- BGMI ---------------- */
         if ($validated['game'] === 'BGMI') {
-
             if ($validated['category'] === 'Squad') {
                 BgmiTeam::create($commonData);
-                return redirect()->back()->with('success', 'BGMI Squad registered');
+                return back()->with('success', "BGMI Squad registered (ID: $registrationId)");
             }
 
             if ($validated['category'] === 'Duo') {
                 BgmiDuo::create($commonData);
-                return redirect()->back()->with('success', 'BGMI Duo registered');
+                return back()->with('success', "BGMI Duo registered (ID: $registrationId)");
             }
 
             if ($validated['category'] === 'Solo') {
                 BgmiSolo::create($commonData);
-                return redirect()->back()->with('success', 'BGMI Solo registered');
+                return back()->with('success', "BGMI Solo registered (ID: $registrationId)");
             }
         }
 
         /* ---------------- FREE FIRE ---------------- */
         if ($validated['game'] === 'FREE_FIRE') {
-
             if ($validated['category'] === 'Squad') {
                 FreefireTeam::create($commonData);
-                return redirect()->back()->with('success', 'Free Fire Squad registered');
+                return back()->with('success', "Free Fire Squad registered (ID: $registrationId)");
             }
 
             if ($validated['category'] === 'Duo') {
                 FreefireDuo::create($commonData);
-                return redirect()->back()->with('success', 'Free Fire Duo registered');
+                return back()->with('success', "Free Fire Duo registered (ID: $registrationId)");
             }
 
             if ($validated['category'] === 'Solo') {
                 FreefireSolo::create($commonData);
-                return redirect()->back()->with('success', 'Free Fire Solo registered');
+                return back()->with('success', "Free Fire Solo registered (ID: $registrationId)");
             }
         }
 
         /* ---------------- VALORANT ---------------- */
-        if ($validated['game'] === 'VALORANT') {
-            if ($validated['category'] === 'Solo') {
-                Valorant::create($commonData);
-                return redirect()->back()->with('success', 'Free Fire Squad registered');
-            }
+        if ($validated['game'] === 'VALORANT' && $validated['category'] === 'Solo') {
+            Valorant::create($commonData);
+            return back()->with('success', "Valorant Solo registered (ID: $registrationId)");
         }
 
-        /* ---------------- EFOOTBALL / CLASH ROYALE ---------------- */
-        if ($validated['game'] === 'EFOOTBALL') {
-            if ($validated['category'] === 'Solo') {
-                EFootball::create($commonData);
-                return redirect()->back()->with('success', 'Free Fire Squad registered');
-            }
+        /* ---------------- EFOOTBALL ---------------- */
+        if ($validated['game'] === 'EFOOTBALL' && $validated['category'] === 'Solo') {
+            EFootball::create($commonData);
+            return back()->with('success', "EFootball Solo registered (ID: $registrationId)");
         }
-        if ($validated['game'] === 'CLASH_ROYALE') {
-            if ($validated['category'] === 'Solo') {
-                ClashRoyal::create($commonData);
-                return redirect()->back()->with('success', 'Free Fire Squad registered');
-            }
+
+        /* ---------------- CLASH ROYALE ---------------- */
+        if ($validated['game'] === 'CLASH_ROYALE' && $validated['category'] === 'Solo') {
+            ClashRoyal::create($commonData);
+            return back()->with('success', "Clash Royale Solo registered (ID: $registrationId)");
         }
 
         return back()->with('error', 'Invalid game or category');
     }
-
 }

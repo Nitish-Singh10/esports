@@ -12,6 +12,7 @@ return new class extends Migration {
     {
         Schema::create('bgmi_team', function (Blueprint $table) {
             $table->id();
+            $table->string('team_id')->unique();
             $table->string('name');
             $table->string('class')->nullable();
             $table->string('rollno')->nullable();
@@ -29,6 +30,7 @@ return new class extends Migration {
 
         Schema::create('bgmi_duo', function (Blueprint $table) {
             $table->id();
+            $table->string('team_id')->unique();
             $table->string('name');
             $table->string('class')->nullable();
             $table->string('rollno')->nullable();
@@ -46,6 +48,7 @@ return new class extends Migration {
 
         Schema::create('bgmi_solo', function (Blueprint $table) {
             $table->id();
+            $table->string('team_id')->unique();
             $table->string('name');
             $table->string('class')->nullable();
             $table->string('rollno')->nullable();

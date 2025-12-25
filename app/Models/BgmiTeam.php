@@ -12,6 +12,7 @@ class BgmiTeam extends Model
     protected $table = 'bgmi_team';
 
     protected $fillable = [
+        'team_id',
         'name',
         'class',
         'rollno',

@@ -12,6 +12,7 @@ class FreefireDuo extends Model
     protected $table = 'freefire_duo';
 
     protected $fillable = [
+        'team_id',
         'name',
         'class',
         'rollno',
