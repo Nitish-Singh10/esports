@@ -33,16 +33,13 @@
                     <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">
                         Name
                     </th>
-                    <th
-                        class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800 hidden md:table-cell">
+                    <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800 md:table-cell">
                         Phone
                     </th>
-                    <th
-                        class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800 hidden md:table-cell">
+                    <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800 md:table-cell">
                         Email
                     </th>
-                    <th
-                        class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800 hidden lg:table-cell">
+                    <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800 lg:table-cell">
                         College
                     </th>
                     <th class="font-normal px-3 pt-0 pb-3 border-b border-gray-200 dark:border-gray-800">
