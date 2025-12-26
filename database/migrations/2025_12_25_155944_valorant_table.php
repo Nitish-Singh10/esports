@@ -21,7 +21,7 @@ return new class extends Migration {
             $table->enum('pay_mode', ['upi', 'cash']);
             $table->string('transaction_id');
             $table->string('college');
-            $table->string('amount')->default(75);
+            $table->string('amount')->default(400);
             $table->string('added_by');
             $table->boolean('verified')->default(0);
             $table->string('slot')->nullable();

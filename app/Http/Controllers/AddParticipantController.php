@@ -42,7 +42,7 @@ class AddParticipantController extends Controller
                 'Solo' => 'FFSO',
             ],
             'VALORANT' => [
-                'Solo' => 'VLSO',
+                'Team' => 'VLTE',
             ],
             'EFOOTBALL' => [
                 'Solo' => 'EFSO',
@@ -51,8 +51,8 @@ class AddParticipantController extends Controller
                 'Solo' => 'CRSO',
             ],
             'COD' => [
-                'Solo' => 'CDSO',
-                'Squad' => 'CDTE',
+                'solo' => 'CDSO',
+                'Team' => 'CDTE',
             ],
             'FC' => [
                 'Solo' => 'FCSO',
@@ -137,9 +137,22 @@ class AddParticipantController extends Controller
                 return back()->with('success', "Free Fire Solo registered (ID: $registrationId)");
             }
         }
+        /* ---------------- COD MOBILE ---------------- */
+        if ($validated['game'] === 'COD') {
+            if ($validated['category'] === 'Team') {
+                CodTeam::create($commonData);
+                return back()->with('success', "Free Fire Squad registered (ID: $registrationId)");
+            }
+
+            if ($validated['category'] === 'solo') {
+                CodSolo::create($commonData);
+                return back()->with('success', "Free Fire Squad registered (ID: $registrationId)");
+            }
+        }
+
 
         /* ---------------- VALORANT ---------------- */
-        if ($validated['game'] === 'VALORANT' && $validated['category'] === 'Solo') {
+        if ($validated['game'] === 'VALORANT' && $validated['category'] === 'Team') {
             Valorant::create($commonData);
             return back()->with('success', "Valorant Solo registered (ID: $registrationId)");
         }
