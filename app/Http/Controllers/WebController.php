@@ -17,6 +17,5 @@ class WebController extends Controller
         } else {
             return redirect('/admin');
         }
-
     }
 }
