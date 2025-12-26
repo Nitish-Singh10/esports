@@ -23,6 +23,16 @@
                 ✅ {{ session('success') }}
             </div>
         @endif
+        @if ($errors->any())
+            <div class="bg-red-100 text-red-700 p-3 rounded mb-4">
+                <ul class="list-disc list-inside">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
 
 
         <h2 class="text-3xl font-bold text-center text-gray-800 mb-8">
