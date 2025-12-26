@@ -72,15 +72,15 @@
                             {{ $reg->full_name }}
                         </td>
 
-                        <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 hidden md:table-cell">
+                        <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 md:table-cell">
                             {{ $reg->phone }}
                         </td>
 
-                        <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 hidden md:table-cell">
+                        <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 md:table-cell">
                             {{ $reg->email }}
                         </td>
 
-                        <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 hidden lg:table-cell">
+                        <td class="sm:p-3 py-2 px-1 border-b border-gray-200 dark:border-gray-800 lg:table-cell">
                             {{ $reg->college_name }}
                         </td>
 
