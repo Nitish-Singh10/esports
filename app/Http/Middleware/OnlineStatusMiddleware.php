@@ -16,7 +16,7 @@ class OnlineStatusMiddleware
 
         // If admin not logged in
         if (!$adminId) {
-            return redirect()->route('login')
+            return redirect('/admin')
                 ->withErrors('Session expired. Please login again.');
         }
 
