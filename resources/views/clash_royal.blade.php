@@ -70,7 +70,7 @@
                                     Verified
                                 </span>
                             @else
-                                <form action="{{ route('bgmi.team.verify', $team->id) }}" method="POST"
+                                <form action="{{ route('clash_royal.verify', $team->id) }}" method="POST"
                                     onsubmit="return confirm('Verify this registration?')" class="inline">
                                     @csrf
                                     <button type="submit" style="color: black;"

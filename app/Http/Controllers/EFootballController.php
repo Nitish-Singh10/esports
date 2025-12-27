@@ -18,4 +18,12 @@ class EFootballController extends Controller
             return redirect('/admin');
         }
     }
+    public function verify($id)
+    {
+        $team = EFootball::findOrFail($id);
+        $team->verified = 1;
+        $team->save();
+
+        return redirect()->back()->with('success', 'Team verified successfully!');
+    }
 }

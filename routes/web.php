@@ -20,9 +20,9 @@ Route::get('/', function () {
 });
 
 Route::post('/register', [DashboardController::class, 'store']);
+Route::get('/admin', [AdminController::class, 'index']);
 
 Route::middleware([OnlineStatusMiddleware::class])->group(function () {
-    Route::get('/admin', [AdminController::class, 'index']);
     Route::post('/login', [AdminController::class, 'login']);
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/add', [AddParticipantController::class, 'index']);
@@ -50,6 +50,9 @@ Route::middleware([OnlineStatusMiddleware::class])->group(function () {
     Route::post('/freefire-solo/{id}/verify', [FreefireController::class, 'verifySolo'])->name('freefire.solo.verify');
     Route::post('/cod_team/{id}/verify', [FCController::class, 'verifyTeam'])->name('cod_team.team.verify');
     Route::post('/cod_solo/{id}/verify', [FCController::class, 'verifySolo'])->name('cod_team.solo.verify');
+    Route::post('/valorant/{id}/verify', [ValorantController::class, 'verify'])->name('valorant.verify');
+    Route::post('/e_football/{id}/verify', [EFootballController::class, 'verify'])->name('e_football.verify');
+    Route::post('/clash_royal/{id}/verify', [ClashRoyalController::class, 'verify'])->name('clash_royal.verify');
 });
 
 Route::get('/session', function () {
