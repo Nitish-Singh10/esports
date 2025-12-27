@@ -21,9 +21,9 @@ Route::get('/', function () {
 
 Route::post('/register', [DashboardController::class, 'store']);
 Route::get('/admin', [AdminController::class, 'index']);
+Route::post('/login', [AdminController::class, 'login']);
 
 Route::middleware([OnlineStatusMiddleware::class])->group(function () {
-    Route::post('/login', [AdminController::class, 'login']);
     Route::get('/dashboard', [DashboardController::class, 'index']);
     Route::get('/add', [AddParticipantController::class, 'index']);
     Route::post('/submit', [AddParticipantController::class, 'submit']);
