@@ -2,13 +2,13 @@
 <html>
 
 <head>
-    <title>Team Verified</title>
+    <title>ID Verified</title>
 </head>
 
 <body>
     <h2>Congratulations {{ $team->name }} 🎉</h2>
 
-    <p>Your Clash Royal team has been successfully verified.</p>
+    <p>Your Payment has been successfully verified.</p>
 
     <p>
         <strong>Team ID:</strong> {{ $team->team_id }}
