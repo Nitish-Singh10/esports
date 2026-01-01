@@ -27,39 +27,42 @@ class ClashRoyalController extends Controller
     {
         $manager = new ImageManager(new Driver());
 
-        // Base template
         $baseImage = public_path('epass_template.png');
 
         if (!file_exists($baseImage)) {
             throw new \Exception('E-pass template not found');
         }
 
-        // ✅ PUBLIC directory
         $outputDir = public_path('epass/generated');
-
         if (!file_exists($outputDir)) {
             mkdir($outputDir, 0755, true);
         }
 
-        // Output file
         $outputPath = $outputDir . "/team_{$team->team_id}.png";
 
         $img = $manager->read($baseImage);
 
-        // Add team ID
+        // 📌 IMAGE DIMENSIONS (important for centering)
+        $width = $img->width();
+        $height = $img->height();
+
+        // 📌 PLACE TEXT IN WHITE SPACE
         $img->text(
-            'TEAM ID: ' . $team->team_id,
-            400,
-            550,
+            $team->team_id,
+            $width / 2,        // horizontal center
+            420,               // vertical position (inside white box)
             function ($font) {
-                $font->size(36);
-                $font->color('#ffffff');
+                // $font->file(public_path('fonts/Montserrat-Bold.ttf')); // optional but recommended
+                $font->size(120);          // 🔥 BIG TEXT
+                $font->color('#000000');   // black for white background
+                $font->align('center');
+                $font->valign('middle');
             }
         );
 
         $img->save($outputPath);
 
-        return $outputPath; // full public path
+        return $outputPath;
     }
 
     public function verify($id)

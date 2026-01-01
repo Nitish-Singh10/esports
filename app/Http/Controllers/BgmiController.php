@@ -2,11 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\TeamVerifiedMail;
 use App\Models\Admin;
 use App\Models\BgmiDuo;
 use App\Models\BgmiSolo;
 use App\Models\BgmiTeam;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Mail;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class BgmiController extends Controller
 {
@@ -30,6 +35,59 @@ class BgmiController extends Controller
             return redirect('/admin');
         }
     }
+
+    private function generateEpass(
+        $model,
+        string $idField = 'id',
+        string $filePrefix = 'epass',
+        int $textY = 420,
+        int $fontSize = 120
+    ) {
+        $manager = new ImageManager(new Driver());
+
+        $baseImage = public_path('epass_template.png');
+
+        if (!file_exists($baseImage)) {
+            throw new \Exception('E-pass template not found');
+        }
+
+        $outputDir = public_path('epass/generated');
+        if (!file_exists($outputDir)) {
+            mkdir($outputDir, 0755, true);
+        }
+
+        // Dynamic ID value
+        $displayId = $model->{$idField};
+
+        // Output path
+        $outputPath = $outputDir . "/{$filePrefix}_{$displayId}.png";
+
+        $img = $manager->read($baseImage);
+
+        // Image dimensions
+        $width = $img->width();
+
+        // Draw ID text
+        $img->text(
+            $displayId,
+            $width / 2,   // horizontal center
+            $textY,       // vertical position
+            function ($font) use ($fontSize) {
+                // Optional font
+                // $font->file(public_path('fonts/Montserrat-Bold.ttf'));
+                $font->size($fontSize);
+                $font->color('#000000');
+                $font->align('center');
+                $font->valign('middle');
+            }
+        );
+
+        $img->save($outputPath);
+
+        return $outputPath;
+    }
+
+
     public function verifyTeam($id)
     {
         if (!session()->has('username')) {
@@ -37,11 +95,31 @@ class BgmiController extends Controller
         }
 
         $team = BgmiTeam::findOrFail($id);
+
+        // ✅ Mark as verified
         $team->verified = 1;
         $team->save();
 
-        return back()->with('success', 'Team verified successfully');
+        // ✅ Generate E-Pass (Reusable Function)
+        $epassPath = $this->generateEpass(
+            $team,        // model
+            'id',         // ID field
+            'bgmi_team'   // file prefix
+        );
+
+        // ✅ Send Mail with Attachment
+        Mail::to($team->email)->send(
+            new TeamVerifiedMail($team, $epassPath)
+        );
+
+        // ✅ Delete image after mail
+        if (File::exists($epassPath)) {
+            File::delete($epassPath);
+        }
+
+        return back()->with('success', 'BGMI Team verified & e-pass emailed successfully!');
     }
+
     public function verifyDuo($id)
     {
         if (!session()->has('username')) {
@@ -49,11 +127,31 @@ class BgmiController extends Controller
         }
 
         $duo = BgmiDuo::findOrFail($id);
+
+        // ✅ Mark as verified
         $duo->verified = 1;
         $duo->save();
 
-        return back()->with('success', 'BGMI Duo verified successfully');
+        // ✅ Generate E-Pass
+        $epassPath = $this->generateEpass(
+            $duo,        // model
+            'id',        // ID field
+            'bgmi_duo'   // file prefix
+        );
+
+        // ✅ Send Mail with E-Pass
+        Mail::to($duo->email)->send(
+            new TeamVerifiedMail($duo, $epassPath)
+        );
+
+        // ✅ Delete image after mail
+        if (File::exists($epassPath)) {
+            File::delete($epassPath);
+        }
+
+        return back()->with('success', 'BGMI Duo verified & e-pass emailed successfully!');
     }
+
     public function verifySolo($id)
     {
         if (!session()->has('username')) {
@@ -61,9 +159,28 @@ class BgmiController extends Controller
         }
 
         $solo = BgmiSolo::findOrFail($id);
+
+        // ✅ Mark as verified
         $solo->verified = 1;
         $solo->save();
 
-        return back()->with('success', 'BGMI Solo verified successfully');
+        // ✅ Generate E-Pass
+        $epassPath = $this->generateEpass(
+            $solo,        // model
+            'id',         // ID field
+            'bgmi_solo'   // file prefix
+        );
+
+        // ✅ Send Mail with E-Pass
+        Mail::to($solo->email)->send(
+            new TeamVerifiedMail($solo, $epassPath)
+        );
+
+        // ✅ Delete image after mail
+        if (File::exists($epassPath)) {
+            File::delete($epassPath);
+        }
+
+        return back()->with('success', 'BGMI Solo verified & e-pass emailed successfully!');
     }
 }
