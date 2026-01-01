@@ -86,8 +86,6 @@ class BgmiController extends Controller
 
         return $outputPath;
     }
-
-
     public function verifyTeam($id)
     {
         if (!session()->has('username')) {
