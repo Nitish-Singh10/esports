@@ -107,7 +107,6 @@
                                             </a>
                                         </div>
                                     @endif
-                                    STEC INOVATION
                                 </div>
                             </button>
                         @endforeach
