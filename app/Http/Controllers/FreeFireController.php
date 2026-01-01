@@ -106,10 +106,6 @@ class FreeFireController extends Controller
 
         $team = FreefireTeam::findOrFail($id);
 
-        // ✅ Mark as verified
-        $team->verified = 1;
-        $team->save();
-
         // ✅ Generate E-Pass
         $epassPath = $this->generateEpass(
             $team,            // model
@@ -126,6 +122,12 @@ class FreeFireController extends Controller
         if (File::exists($epassPath)) {
             File::delete($epassPath);
         }
+
+
+        // ✅ Mark as verified
+        $team->verified = 1;
+        $team->save();
+
 
         return back()->with('success', 'Free Fire Team verified & e-pass emailed successfully!');
     }
