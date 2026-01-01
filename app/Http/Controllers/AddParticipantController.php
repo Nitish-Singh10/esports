@@ -99,7 +99,7 @@ class AddParticipantController extends Controller
             'pay_mode' => $validated['payment'],
             'transaction_id' => $validated['transaction'] ?? 'CASH',
             'college' => $validated['college'],
-            'added_by' => auth()->user()->username ?? 'admin',
+            'added_by' => session('username') ?? 'admin',
         ];
 
         /* ---------------- BGMI ---------------- */
